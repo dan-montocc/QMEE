@@ -8,7 +8,7 @@ library(ggfortify)
 theme_set(theme_classic())
 
 #Upload dataset to R session
-SpeciesData_Consol <- read.csv("C:/Users/dan_g/OneDrive/School/University/Graduate Studies/Grad Courses/QMEE (708)/QMEE_Directory/QMEE-journey/QMEE-journey/SpeciesData_Consol.csv")
+SpeciesData_Consol <- read.csv("C:/Users/dan_g/OneDrive/School/University/Graduate Studies/Grad Courses/QMEE (708)/QMEE_Directory/QMEE_repo/QMEE/SpeciesData_Consol.csv")
 attach(SpeciesData_Consol)
 head(SpeciesData_Consol)
 

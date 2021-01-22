@@ -8,7 +8,7 @@ Description: This dataset is a consolidation and overview of a larger dataset, c
 
 [For more information see: Croft, M. V., Chow-Fraser, P., 2007. Use and development of the wetland macrophyte index to detect water quality impairment in fish habitat of Great Lakes coastal marshes. J. Great Lakes Res. 33, 172–197. https://doi.org/10.3394/0380-1330(2007)33[172:UADOTW]2.0.CO;2]
 
-Metadata for this data can be found by reading the file Assign1_metadata.pdf in my GitRepo: QMEE-journey.
+Metadata for this data can be found by reading the file Assign1_metadata.pdf in my GitRepo: QMEE.
 
 Questions of interest: While I am hoping to perform more complex analysis with the complete dataset, which needs to digitized (once access to the appropriate files can be given in LSB); I do have some initial biological questions I would like to explore with SPeciesData_Consol.csv. 
 
