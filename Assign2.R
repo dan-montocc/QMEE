@@ -78,3 +78,6 @@ ggboxplot(AbunSub.long, x = "PerAbun", y = "TotAbun",
 
 #running into error message for boxplot
 #not sure why from looking online? Help would be appreciated!
+
+#after which I would run boxplot analysis and Wilcoxon signed rank tests on abundance
+#and submergent and terrestrial plant species
