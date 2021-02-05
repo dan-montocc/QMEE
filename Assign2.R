@@ -8,6 +8,8 @@ library(dplyr)
 library(ggpubr)
 library(rstatix)
 library(coin)
+library(janitor)
+library(compare)
 
 #Upload dataset to R session
 PeriodComp <- read.csv(here("WMI_SpeciesAbun_PeriodGroup.csv"))
@@ -20,55 +22,81 @@ head(PeriodComp)
 print(PeriodComp$Wetland.Name)
 
 #check if functional classes add to total abundance value
-TotAbun1Test <- PeriodComp$Emer.1 + PeriodComp$Float.1 + PeriodComp$Sub.1
-## JD: It would be cool to do this part using mutate in dplyr
+PeriodComp <- (PeriodComp %>% mutate(AbunCheck1 = PeriodComp$Emer.1 + PeriodComp$Float.1 + PeriodComp$Sub.1))
 
-head(PeriodComp$Abun.1,10)
-head(TotAbun1Test, 10)
-## JD: Using "head" seems like bad practice; what if there's a mismatch later?
-## Also: once you get it to match, maybe put an automatic test.
-#numbers match: e.g., 
-## stopifnot(identical(PeriodComp$Abun, TotAbun1Test))
-## This fails; can we figure out why? Warning: identical can be tricky
+#same with native and exotic (try Period 2 for another check)
+PeriodComp <- (PeriodComp %>% mutate(AbunCheck2 = PeriodComp$Native.2 + PeriodComp$Exotic.2))
+
+all(PeriodComp$Abun.1 == PeriodComp$AbunCheck1)
+compare(PeriodComp$Abun.1, PeriodComp$AbunCheck1, ignoreNames = TRUE, coerce = TRUE)
+
+#both return false?
+#different classes perhaps?
+sapply(PeriodComp, class)
+
+#no? check where differences are exactly
+which(PeriodComp$Abun.1 != PeriodComp$AbunCheck1, arr.ind=TRUE)
+
+#there is a difference in 8 rows! Go back to original data csv to see where error came from...
+##DM: Thank you Jonathan for the more accurate check :)
+
+
+#remove old dataframe first
+rm(PeriodComp)
+
+#Upload corrected csv file "SpeciesData_Comp_Corrected.csv"
+#. replaced with underscore Period 1 or 2
+#Nat = native, Exo = exotic
+PeriodComp <- read.csv(here("SpeciesData_Comp_Corrected.csv"))
+
+#check if functional classes add to total abundance value
+PeriodComp <- (PeriodComp %>% mutate(AbunCheck1 = PeriodComp$Emer_1 + PeriodComp$Float_1 + PeriodComp$Sub_1))
+all(PeriodComp$Abun_1 == PeriodComp$AbunCheck1)
+
+PeriodComp <- (PeriodComp %>% mutate(AbunCheck2 = PeriodComp$Nat_2 + PeriodComp$Exo_2))
+all(PeriodComp$Abun_2 == PeriodComp$AbunCheck2)
 
 #check to see if data has a normal distribution to use parametric t-tests
 #Abundance for Period 1 and 2
-hist(PeriodComp$Abun.1, plot=TRUE)
-qqPlot(PeriodComp$Abun.1)
-hist(PeriodComp$Abun.2, plot=TRUE)
-qqPlot(PeriodComp$Abun.2)
+hist(PeriodComp$Abun_1, plot=TRUE)
+qqPlot(PeriodComp$Abun_1)
+hist(PeriodComp$Abun_2, plot=TRUE)
+qqPlot(PeriodComp$Abun_2)
 
 #Submergent abundance for Period 1 and 2
-hist(PeriodComp$Sub.1, plot=TRUE)
-qqPlot(PeriodComp$Sub.1)
-hist(PeriodComp$Sub.2, plot=TRUE)
-qqPlot(PeriodComp$Sub.2)
+hist(PeriodComp$Sub_1, plot=TRUE)
+qqPlot(PeriodComp$Sub_1)
+hist(PeriodComp$Sub_2, plot=TRUE)
+qqPlot(PeriodComp$Sub_2)
 
-## JD: What's going on with Terr.1??
+## JD: What's going on with Terr_1??
+# DM: No terrestrial plants were sampled in Period 1 (low water) - not informative then !Remove!
 #Terrestrial abundance for Period 1 and 2
-hist(PeriodComp$Terr.1, plot=TRUE)
-qqPlot(PeriodComp$Terr.1)
-hist(PeriodComp$Terr.2, plot=TRUE)
-qqPlot(PeriodComp$Terr.2)
+hist(PeriodComp$Terr_1, plot=TRUE)
+qqPlot(PeriodComp$Terr_1)
+hist(PeriodComp$Terr_2, plot=TRUE)
+qqPlot(PeriodComp$Terr_2)
 
 #reasonable to use parametric for abundance and submergent, not terrestrial
 #use Wilcoxon signed rank for all for easier comparison and consistency
 
-#create subsets of data for Abundance, Submergent, Terrestrial
-AbunSubset <- PeriodComp[c(1:703),c(2,5,12)]
+#create subsets of data for Abundance, Submergent
+#determining column number of variables for extraction
+match("Abun_1", names(PeriodComp))
+match("Abun_2", names(PeriodComp))
+AbunSubset <- PeriodComp[c(1:703),c(2,3,10)]
 summary(AbunSubset)
-SubSubset <- PeriodComp[c(1:703),c(2,8,15)]
+
+match("Sub_1", names(PeriodComp))
+match("Sub_2", names(PeriodComp))
+SubSubset <- PeriodComp[c(1:703),c(2,5,12)]
 summary(SubSubset)
-TerrSubset <- PeriodComp[c(1:703),c(2,9,16)]
-summary(TerrSubset)
 
 #gather Abundance, Submergent and Terrestrial into same column
 AbunSub.long <- pivot_longer(AbunSubset, cols=!Wetland.Name, names_to="PerAbun", values_to="TotAbun")
 print(AbunSub.long)
 SubSub.long <- pivot_longer(SubSubset, cols=!Wetland.Name, names_to="PerSub", values_to="TotSub")
 print(SubSub.long)
-TerrSub.long <- pivot_longer(TerrSubset, cols=!Wetland.Name, names_to="PerTerr", values_to="TotTerr")
-print(TerrSub.long)
 
 #creating weights
 AbunSub.long %>%
@@ -81,19 +109,12 @@ summary(AbunSub.long)
 # Plot weight by Period and color by Period
 ggboxplot(AbunSub.long, x = "PerAbun", y = "TotAbun", 
           color = "PerAbun", palette = c("#00AFBB", "#E7B800"),
-          ## order = c("Abun.1", "Abun.2"),
+          ## order = c("Abun_1", "Abun_2"),
           ylab = "Species abundance", xlab = "Period of collection")
 
-#running into error message for boxplot
-#not sure why from looking online? Help would be appreciated!
-## JD: It's not an error message, since it's making your boxplot
-## It's telling you that there are 1296 NAs in your data frame: 
-## you should trace them back and figure out
-#### if they're supposed to be NAs (in which case you should delete them before plotting) 
-#### or if they're supposed to be 0s (in which case set them to 0)
-## The worst thing is if there's a mixture, so it can be important to trace.
-
-#after which I would run boxplot analysis and Wilcoxon signed rank tests on abundance
-#and submergent and terrestrial plant species
-
-## Grade 2.1/3
+#NA's - determine source
+sapply(AbunSub.long, function(x) sum(is.na(x)))
+#clean dataframe
+AbunSub.long <- AbunSub.long[c(1:110),c(1:3)]
+#check
+sapply(AbunSub.long, function(x) sum(is.na(x)))

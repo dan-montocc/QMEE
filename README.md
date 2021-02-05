@@ -52,3 +52,9 @@ Of great importance is the number of submergent species available in a wetland, 
 What is unclear is whether the change in water levels will have impacted all coastal wetlands equally (or rather significantly) as their bathymetry, exposure to the lake, and level of human disturbance, all varies across Georgian Bay. It is also unknown whether the absolute number of species for a given wetland zone functional group is enough to capture the potential change in a wetland's ecological function for fish, or that a more-detailed species-specific model is required?
 
 I predict that with increasing water levels, the number of emergent species present should decrease, while the number of submergent species should increase with increasing water levels. I also predict that the occurrence of terrestrial plant species should increase with increasing lake levels, as the meadow and high-marsh zones became inundated with water, and then became included in our dataset more due to our sampling protocols requiring all aquatic areas of a wetland to be sampled. In order to test these hypotheses, I will likely need to perform a paired t-test of these variables against water level (likely non-parametric due to sample size).
+
+##Assignment 3
+
+I will continue assignment 3 from where I left off in "Assign2.R". I have also gone back and addressed past comments by Jonathan and found an error in the csv, so please start at line 46.
+
+
