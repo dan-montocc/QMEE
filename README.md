@@ -60,4 +60,8 @@ Purpose: Assignment 3 for QMEE (708) Course
 
 I split Assignment 3 into a new R file, as there was errors in my original dataset of Assignment 2 and that script became a diagnosis and cleaning file.
 
+Dumb-bell plot: In these plots I am trying to compare the changes in total and submergent species abundance by wetland region and site between Period 1 and 2. Since the variance is the focus for this question, that is a before and after comparison, I decided to use a dumb-bell plot. The graphing principle I used is based on the Cleveland hierarchy, that humans are best at interpreting distances along the same scale.
+
+Treemap plot: For assessing changes in all functional plant species groups, I thought another graphing approach would be better, as it is difficult for people to discern multiple colours (I thought a dumbbell plot would be too busy). A treemap seemed to make sense as this would show the proportion of functional groups by area, rather than angles like in a pie chart, again making use of the Cleveland hierarchy. Unfortunately, I was unable to then plot the two treemaps together, so I instead joined them and made a dumbbell plot for all of Georgian Bay.
+
 
