@@ -6,6 +6,7 @@ library(here)
 library(car)
 library(dplyr)
 library(ggpubr)
+library(ggplot2)
 library(rstatix)
 library(coin)
 library(janitor)
@@ -92,7 +93,7 @@ match("Sub_2", names(PeriodComp))
 SubSubset <- PeriodComp[c(1:703),c(2,5,12)]
 summary(SubSubset)
 
-#gather Abundance, Submergent and Terrestrial into same column
+#gather Abundance and Submergent into same column
 AbunSub.long <- pivot_longer(AbunSubset, cols=!Wetland.Name, names_to="PerAbun", values_to="TotAbun")
 print(AbunSub.long)
 SubSub.long <- pivot_longer(SubSubset, cols=!Wetland.Name, names_to="PerSub", values_to="TotSub")
@@ -103,7 +104,10 @@ AbunSub.long %>%
   group_by(PerAbun) %>%
   get_summary_stats(TotAbun, type = "median_iqr")
 
-summary(AbunSub.long)
+SubSub.long %>%
+  group_by(PerSub) %>%
+  get_summary_stats(TotSub, type = "median_iqr")
+summary(SubSub.long)
 
 #box plots
 # Plot weight by Period and color by Period
@@ -116,5 +120,21 @@ ggboxplot(AbunSub.long, x = "PerAbun", y = "TotAbun",
 sapply(AbunSub.long, function(x) sum(is.na(x)))
 #clean dataframe
 AbunSub.long <- AbunSub.long[c(1:110),c(1:3)]
+SubSub.long <- SubSub.long[c(1:110),c(1:3)]
 #check
 sapply(AbunSub.long, function(x) sum(is.na(x)))
+
+#plot box plots
+ggboxplot(AbunSub.long, x = "PerAbun", y = "TotAbun", 
+          color = "PerAbun", palette = c("#00AFBB", "#E7B800"),
+          ## order = c("Abun_1", "Abun_2"),
+          ylab = "Species abundance", xlab = "Period of collection")
+
+ggboxplot(SubSub.long, x = "PerSub", y = "TotSub", 
+          color = "PerAbun", palette = c("#00AFBB", "#E7B800"),
+          ## order = c("Abun_1", "Abun_2"),
+          ylab = "Submergent species abundance", xlab = "Period of collection")
+
+#save subset data as .rds
+saveRDS(AbunSub.long, "SpeciesAbun_Subset_Long.rds")
+saveRDS(SubSub.long, "SpeciesSub_Subset_Long.rds")
