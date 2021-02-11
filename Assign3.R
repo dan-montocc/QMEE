@@ -13,9 +13,13 @@ library(grid)
 
 #Upload dataset to R session
 PeriodComp <- read.csv(here("SpeciesData_Comp_Corrected.csv"))
+## BMB: try not to use hard-coded numeric values.
+## janitor::remove_empty() + select _names_ of columns you want ...
 TotAbun_short <- PeriodComp[c(1:55),c(1,2,3,10)]
 SubAbun_short <- PeriodComp[c(1:55),c(1,2,5,12)]
 
+## BMB: I would probably phase out these interactive summaries/checks
+## at some point you should decide your data are clean ...
 #check upload
 summary(PeriodComp)
 summary(TotAbun_short)
@@ -31,6 +35,7 @@ tail(SubAbun_short)
 
 #show variance in species abundance between Period 1 and 2
 #dumbbell plot
+## BMB: this might not be necessary?
 TotAbun_short$Wetland.Name <- factor(TotAbun_short$Wetland.Name)
 
 AbunDumbPlot <- ggplot(TotAbun_short, aes(x=Abun_1, xend=Abun_2, y=Wetland.Name)) + 
@@ -54,6 +59,9 @@ AbunDumbPlot <- ggplot(TotAbun_short, aes(x=Abun_1, xend=Abun_2, y=Wetland.Name)
             color="black", size=2, hjust=1.5)
 
 AbunDumbPlot
+
+## BMB: can you order this by something other than alphabet?
+## max, min, mean, north-to-south?
 #pretty cluttered by site, plot by region instead?
 #upload region coding file
 Regions <- read.csv(here("WetlandSites_RegionFile.csv"))
@@ -86,6 +94,10 @@ AbunDumbPlot2 <- ggplot(TotAbun_short, aes(x=Abun_1, xend=Abun_2, y=Region)) +
             color="black", size=2, hjust=1.5)
 
 AbunDumbPlot2
+
+## BMB: maybe x=before vs after?
+## how important is it to identify individual wetlands?
+
 #total abundance decreases in Period 2 except site GN
 #this includes terrestrials as well though!
 #look at just submergent species
@@ -126,22 +138,27 @@ tail(PeriodCompAll)
 #create small dataframe for treemap plotting
 #Period 1
 FuncGroup <- c("Submergent","Emergent","Floating", "Terrestrial")
+## BMB: PLEASE don't hard-code values!
 Value <- c(1014,389,184,0)
 Per1_TreeData <- data.frame(FuncGroup,Value)
 print(Per1_TreeData)
+
 
 Tree_Per1 <- treemap(Per1_TreeData,
                      index="FuncGroup",
                      vSize="Value",
                      type="index",
-                     palette = "Set2",                        # Select your color palette from the RColorBrewer presets or make your own.
-                     title="Period 1",                      # Customize your title
+                     palette = "Set2",    # Select your color palette from the RColorBrewer presets or make your own.
+                     title="Period 1",    # Customize your title
                      fontsize.title=12, 
                      fontcolor.labels= "black"
                      ) 
+## BMB: this graph doesn't convey very much information (3 data values)
+## ("if a picture isn't worth 1000 words, the hell with it")
 
 #Period 2
 FuncGroup2 <- c("Submergent","Emergent","Floating", "Terrestrial")
+## BMB: PLEASE don't hard-code values!
 Value2 <- c(254,129,32,178)
 Per2_TreeData <- data.frame(FuncGroup2,Value2)
 print(Per2_TreeData)
@@ -165,6 +182,23 @@ print(Tree_Per2, vp = vplayout(1,2))
 
 #Issue that treemaps are not saved as an item type that can be plotted or printed
 #How to save as another plot object?
+
+## BMB: one possibility:
+pc <- (PeriodComp
+    %>% pivot_longer(names_to="type",values_to="count",-(1:2))
+    %>% separate(type,c("type","period"),convert=TRUE)
+    %>% group_by(type,period)
+    %>% summarise(across(count,sum),.groups="drop")
+    %>% filter(type %in% c("Sub","Emer","Float","Terr"))
+)
+library(treemapify)
+(ggplot(pc,aes(fill=type,area=count))
+    + geom_treemap()
+    + geom_treemap_text(aes(label=type),place="center")
+    + facet_wrap(~period)
+)
+## BMB: I'm still not crazy about this - much easier to compare
+## barplots etc. ?
 
 #combine Periods to do a dumbbell
 FuncGroup <- c("Submergent","Emergent","Floating", "Terrestrial")
@@ -197,3 +231,13 @@ AllDumbPlot <- ggplot(AllPer_TreeData, aes(x=Value1, xend=Value2, y=FuncGroup)) 
             color="black", size=2, hjust=1.5)
 
 AllDumbPlot
+
+
+## BMB: this is fine. Would be really good if you could process
+## your data in R to get what you want rather than hard-coding totals
+## gotten in some other way: ask for help doing this!
+## The graphs are fine (and attractive), although I would quibble
+## with a lot of the specific choices - I think you're not really
+## using the Cleveland hierarchy effectively ...
+
+## grade: 2/3
