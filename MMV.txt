@@ -1,0 +1,52 @@
+##MMV Assignment
+
+Author: Danielle Montocchio
+Date: February 12, 2021
+
+Question 1:
+ 
+You pick a person from this population at random, and test them, and the test is positive.
+What is the probability that they have MMV?
+
+Solution:
+
+Need to know ~ False positive rate (FPR), False negative rate (FPN), Prevalence (P(MMV))
+
+Given ~ FPR, Sensitivity, P(MMV)
+
+FPR = 5%
+FNR = 100% - sensitivity = 0%
+P (MMV) = 1%
+
+Assuming we have a popluation of 100 000 people, then we can determine the probability that the random person selected tests positive 
+and has MMV - P(MMV|positive)
+
++---------------+-------+---------+---------+
+|               | MMV   | Healthy | TOTALS  |
++---------------+-------+---------+---------+
+| Actual Status | 1 000 |  99 000 | 100 000 |
++---------------+-------+---------+---------+
+| Positive Test | 1 000 |   4 950 |   5 950 |
++---------------+-------+---------+---------+
+| Negative Test |     0 |  94 050 |  94 050 |
++---------------+-------+---------+---------+
+
+Using the numbers from the table:
+P(MMV|positive) = # of positive tests for people with MMV/total # of tests performed
+P(MMV|positive) = 1000/5950 = 16.81% 
+Therefore, for this test P(MMV|positive) or the positive predictive value is approximately 17%.
+
+
+Question 2:
+
+You learn that your friend has a positive rapid test for MMV. What do you tell them?
+
+I would tell them that they should probably retest to confirm that this is not a false positive, as there is actually only a 17% chance that have MMV;
+or in other words, there is a 83% chance that you do not have MMV, even though the test was positive. I would also probably say that even though there
+is a small chance that they may have MMV, wanting to make mathematical models to describe biological phenomena is not the worst to disease to have,
+and can be seen as a helpful compulsion to some people. ;) That being said, these rates are based on the assumption that people with MMV and those without, are as
+equally likely to be tested. The more realistic scenario is that only those with symptoms of MMD are more likely to go and be tested then those
+without symptoms.
+
+
+Source to help complete this assignment: Stan Brown (https://brownmath.com/stat/falsepos.htm).
