@@ -184,21 +184,46 @@ print(Tree_Per2, vp = vplayout(1,2))
 #How to save as another plot object?
 
 ## BMB: one possibility:
+
+get_binCI <- function(x,n) {
+    b <- binom.test(x, n)$conf.int
+    return(tibble(lwr=b[1],upr=b[2]))
+}
+
 pc <- (PeriodComp
-    %>% pivot_longer(names_to="type",values_to="count",-(1:2))
+    %>% pivot_longer(names_to="type",values_to="count",-starts_with("Wetland"))
     %>% separate(type,c("type","period"),convert=TRUE)
-    %>% group_by(type,period)
-    %>% summarise(across(count,sum),.groups="drop")
+    %>% group_by(period,type)
+    %>% summarise(across(count,sum),.groups="drop_last") ## keep period
     %>% filter(type %in% c("Sub","Emer","Float","Terr"))
+    %>% mutate(total=sum(count),prop=count/total)
+    ## https://stackoverflow.com/questions/29614849/dplyrmutate-to-add-multiple-values
+    %>% group_by(period,type)
+    %>% do(cbind(.,get_binCI(.$count,.$total)))
+    ## should use across() ?
+    %>% mutate_at("type",~factor(.,levels=c("Sub","Float","Emer","Terr")))
 )
+
 library(treemapify)
 (ggplot(pc,aes(fill=type,area=count))
     + geom_treemap()
     + geom_treemap_text(aes(label=type),place="center")
     + facet_wrap(~period)
 )
-## BMB: I'm still not crazy about this - much easier to compare
-## barplots etc. ?
+
+theme_set(theme_bw())
+pd <- position_dodge(width=0.25)
+print(ggplot(pc,aes(x=factor(period),y=prop,colour=type)) +
+      geom_point(aes(size=count),position=pd) +
+      geom_linerange(aes(ymin=lwr,ymax=upr),position=pd) +
+      ## trying for an "aquatic to terrestrial" colour scale (don't like the yellow)
+      ## topo.colors(4) isn't much better
+      scale_colour_viridis_d()
+)
+
+
+
+
 
 #combine Periods to do a dumbbell
 FuncGroup <- c("Submergent","Emergent","Floating", "Terrestrial")
