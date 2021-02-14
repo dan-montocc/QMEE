@@ -218,8 +218,11 @@ print(ggplot(pc,aes(x=factor(period),y=prop,colour=type)) +
       geom_linerange(aes(ymin=lwr,ymax=upr),position=pd) +
       ## trying for an "aquatic to terrestrial" colour scale (don't like the yellow)
       ## topo.colors(4) isn't much better
-      scale_colour_viridis_d()
+      scale_colour_viridis_d() +
+        labs(x="Period", y="Proportion", col="Functional Group",
+             size="Species Count")
 )
+
 
 
 
