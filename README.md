@@ -59,8 +59,11 @@ Dumb-bell plot: In these plots I am trying to compare the changes in total and s
 Treemap plot: For assessing changes in all functional plant species groups, I thought another graphing approach would be better, as it is difficult for people to discern multiple colours (I thought a dumbbell plot would be too busy). A treemap seemed to make sense as this would show the proportion of functional groups by area, rather than angles like in a pie chart, again making use of the Cleveland hierarchy. Unfortunately, I was unable to then plot the two treemaps together, so I instead joined them and made a dumbbell plot for all of Georgian Bay.
 
 ##Assignment 4
+
 Author: Danielle Montocchio
+
 Date: February 15, 2021
+
 Purpose: Assignment 4 for QMEE (708) Course
 
 Note: I felt that from past assignments, using the consolidated form of my data, I have already asked the hypotheses I was interested in with this specific dataset. Therefore, this hypothesis relates to the complete dataset collected by our lab over 20 years (see 'metadata_Assign1Data.html' for details). Once compiled, the data will have presence/absence for macrophyte species, the location they were found in a given wetland, the water depth they were found at, and can be linked to other environmental variables such as water quality parameters from a separate dataset.
