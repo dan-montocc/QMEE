@@ -2,8 +2,11 @@
 
 
 ## Assignment 1
+
 Author: Danielle Montocchio
+
 Date: January 22, 2021
+
 Purpose: Assignment 1 for QMEE (708) Course
 
 Dataset: `SpeciesData_Consol.csv`
@@ -27,7 +30,9 @@ Avoid asking "does X affect Y?" - because the answer is almost always "yes" for 
 ## Assignment 2
 
 Author: Danielle Montocchio
+
 Date: January 29, 2021
+
 Purpose: Assignment 2 for QMEE (708) Course
 
 Dataset: `WMI_SpeciesAbun_PeriodGroup.csv`
@@ -50,7 +55,9 @@ I predict that with increasing water levels, the number of emergent species pres
 ## Assignment 3
 
 Author: Danielle Montocchio
+
 Date: February 6, 2021
+
 Purpose: Assignment 3 for QMEE (708) Course
 
 I split Assignment 3 into a new R file, as there was errors in my original dataset of Assignment 2 and that script became a diagnosis and cleaning file.
