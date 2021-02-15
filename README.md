@@ -1,10 +1,6 @@
 # QMEE
 
 
-<!--
-JD: I took the liberty of consolidating your README files here.
--->
-
 ## Assignment 1
 Author: Danielle Montocchio
 Date: January 22, 2021
@@ -18,8 +14,6 @@ Description: This dataset is a consolidation and overview of a larger dataset, c
 
 Metadata for this data can be found by reading the file `Assign1_metadata.pdf`
 
-<!-- BMB: probably don't need to say where it is since we can assume reader is in the repo already?  It's too bad the metadata are in PDF, not in a machine-readable format ...
--->
 
 Questions of interest: While I am hoping to perform more complex analysis with the complete dataset, which needs to digitized (once access to the appropriate files can be given in LSB); I do have some initial biological questions I would like to explore with `SpeciesData_Consol.csv`. 
 
@@ -64,4 +58,14 @@ Dumb-bell plot: In these plots I am trying to compare the changes in total and s
 
 Treemap plot: For assessing changes in all functional plant species groups, I thought another graphing approach would be better, as it is difficult for people to discern multiple colours (I thought a dumbbell plot would be too busy). A treemap seemed to make sense as this would show the proportion of functional groups by area, rather than angles like in a pie chart, again making use of the Cleveland hierarchy. Unfortunately, I was unable to then plot the two treemaps together, so I instead joined them and made a dumbbell plot for all of Georgian Bay.
 
+##Assignment 4
 
+Note: I felt that from past assignments, using the consolidated form of my data, I have already asked the hypotheses I was interested in with this specific dataset. Therefore, this hypothesis relates to the complete dataset collected by our lab over 20 years (see "metadata_Assign1Data.html" for details). Once compiled, the data will have presence/absence for macrophyte species, the location they were found in a given wetland, the water depth they were found at, and can be linked to other environmental variables such as water quality parameters from a separate dataset.
+
+Hypothesis: Considering the importance of macrophyte species presence/absence and distribution within a wetland for fish communities, our lab's dataset which not only covers a vast range of wetlands with differing geomorphology, but also across two periods of distinct water-levels, provides a unique case study that can be used to model species distributions. I would like to develop a Species Distribution Model (SDM) of macrophyte species in Georgian Bay coastal wetlands, in order to predict the presence/absence of a given species of plant, depending on differing environmental conditions, particularly water level changes. 
+
+If successful in developing a model which effectively predicts species distributions using environmental variables, this model is then proposed to be extended to predict fish species presence/absence, based on environmental conditions and macrophyte species presence. This first step is important, as past research has shown that fish community structure seems to be more dependent on macrophyte species composition, rather than water quality (Cvetkovic et al., 2010).
+
+Testing methodology: In order to develop this SDM, I will likely develop several models of complementary performance and then cross-validate them using separate data to establish which model best fits the goal of my study. This method has been proposed by Norberg et al. (2019), who assessed 33 variants of 15 different types of SDMs. Their founding was that, with every model, there are trade-offs in what the model is capable of predicting and accounting for ecologically, depending on the model's structure and assumptions. That being said, these researchers suggested the use of Joint Species Distribution Models (JSDM), when evaluating data that has built-in ecological function redundancy (that is not one specific species has a ecological function that no other species can provide). This characteristic applies to our data, as was determined by the first chapter of my thesis. In addition, JSDMs capture species‐to‐species associations, without necessarily assuming rigid species‐by‐species relationships, which leads to superior predictions at the community-level.
+
+There are several possible JSDMs to choose from, which would require detailed research into each, assessing their uses and built-in assumptions. That being said, Norberg et al. (2010) did propose several, such as species archetype model (SAM), multivariate regression tree (MRTS), multivariate stochastic neural networks (MISTN), and hierarchical modeling of species communities (HMSC). All of which may be effective for my data.
