@@ -47,7 +47,8 @@ What is unclear is whether the change in water levels will have impacted all coa
 
 I predict that with increasing water levels, the number of emergent species present should decrease, while the number of submergent species should increase with increasing water levels. I also predict that the occurrence of terrestrial plant species should increase with increasing lake levels, as the meadow and high-marsh zones became inundated with water, and then became included in our dataset more due to our sampling protocols requiring all aquatic areas of a wetland to be sampled. In order to test these hypotheses, I will likely need to perform a paired t-test of these variables against water level (likely non-parametric due to sample size).
 
-##Assignment 3
+## Assignment 3
+
 Author: Danielle Montocchio
 Date: February 6, 2021
 Purpose: Assignment 3 for QMEE (708) Course
@@ -58,7 +59,7 @@ Dumb-bell plot: In these plots I am trying to compare the changes in total and s
 
 Treemap plot: For assessing changes in all functional plant species groups, I thought another graphing approach would be better, as it is difficult for people to discern multiple colours (I thought a dumbbell plot would be too busy). A treemap seemed to make sense as this would show the proportion of functional groups by area, rather than angles like in a pie chart, again making use of the Cleveland hierarchy. Unfortunately, I was unable to then plot the two treemaps together, so I instead joined them and made a dumbbell plot for all of Georgian Bay.
 
-##Assignment 4
+## Assignment 4
 
 Author: Danielle Montocchio
 
