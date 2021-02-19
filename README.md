@@ -85,3 +85,7 @@ Testing methodology: In order to develop this SDM, I will likely develop several
 There are several possible JSDMs to choose from, which would require detailed research into each, assessing their uses and built-in assumptions. That being said, Norberg et al. (2010) did propose several, such as species archetype model (SAM), multivariate regression tree (MRTS), multivariate stochastic neural networks (MISTN), and hierarchical modeling of species communities (HMSC). All of which may be effective for my data.
 
 The parameters I could use to evaluate these different models may include those used by Norberg et al. (2019), such as accuracy, discrimination, calibration, and precision.
+
+JD: This is cool, and I think useful for us and for you. But there's no hypothesis here. You're essentially describing a predictive project, which is fine in general, but not a good fit for this assignment.
+
+Grade 2.0/3
