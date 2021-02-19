@@ -44,9 +44,10 @@ You learn that your friend has a positive rapid test for MMV. What do you tell t
 I would tell them that they should probably retest to confirm that this is not a false positive, as there is actually only a 17% chance that have MMV;
 or in other words, there is a 83% chance that you do not have MMV, even though the test was positive. I would also probably say that even though there
 is a small chance that they may have MMV, wanting to make mathematical models to describe biological phenomena is not the worst to disease to have,
-and can be seen as a helpful compulsion to some people. ;) That being said, these rates are based on the assumption that people with MMV and those without, are as
+and can be seen as a helpful compulsion to some people. ;)
+
+JD: This is the key point; not sure why you stick it at the bottom ☺. That being said, these rates are based on the assumption that people with MMV and those without, are as
 equally likely to be tested. The more realistic scenario is that only those with symptoms of MMD are more likely to go and be tested then those
 without symptoms.
-
 
 Source to help complete this assignment: Stan Brown (https://brownmath.com/stat/falsepos.htm).
