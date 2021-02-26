@@ -89,3 +89,40 @@ The parameters I could use to evaluate these different models may include those 
 JD: This is cool, and I think useful for us and for you. But there's no hypothesis here. You're essentially describing a predictive project, which is fine in general, but not a good fit for this assignment.
 
 Grade 2.0/3
+
+
+## Assignment 5
+
+Author: Danielle Montocchio
+
+Date: February 26, 2021
+
+Purpose: Assignment 5 for QMEE (708) Course
+
+Data: 'WQI_Volume_Data.csv'
+
+Data Description: This dataset consists of the calculated volume of a given Georgian Bay coastal wetland during the time it was sampled, as well its calculated WQI (Water Quality Index) score. The WQI is an index designed to quantify the effect that human disturbance, such as agriculture and roads, can have on wetland health. Specifically, it uses the known the relationship between good water quality and the growth of submerged aquatic vegetation to establish whether a wetland is "healthy" enough to sustain suitable fish habitat. To calculate this index 12 water quality parameters, of which I have included 8 that I hypothesize may be pertinent to my analysis.
+
+Background: Between the years of 2000-2019, Lake Huron has experienced to irregular water levels, which consists of two distinct periods. Period 1, from 2003-2013, was a sustained low-water period; Period 2, from 2014-2019, was a high-water period (0.9m high water-levels than in Period 1).
+
+Biologically, such a change in water-levels is theorized to alter water quality, as previous studies has  found a link between water levels and water quality parameters such as turbidity and total suspended sediments (TSS)(Chow-Fraser, 1999), which are used to calculate the WQI scores. The past established relationship was that water-levels increase, TSS and turbidity decrease.
+
+This is theorized to be due to the fact that as water-levels increase, so too does the volume of the wetland, which introduces a dilution effect to the water quality parameters that are measured as concentrations per a given volume.
+
+Therefore, with this data, since we were able to estimate wetland volume for a given site, we can test whether this dilution effect is occurring.
+
+Hypothesis #1: If the WQI is calculated using water quality parameters, such as TSS, that are measured using concentration-volume ratios, then as Georgian Bay coastal wetlands volumes increase with increasing water-levels, WQI scores should increase as well. This is because the lower the concentrations of these parameters, the higher the WQI score (considered to be better water quality).
+
+Hypothesis #2: If the WQI is increasing due to decreasing concentrations of certain water quality parameters, then there should be a negative relationship between increasing wetland volumes and these parameters, such as turbidity and TSS (may also impact TP, TNN, TAN, TN, and/or SRP). I am focusing on the first two parameters for now, due to the past findings of Chow-Fraser (1999) looking specifically at turbidity and TSS.
+
+"Traditional" statistical tests: Perform a linear regression of WQI scores against wetland volume
+
+Permutation tests: 
+
+1) Manually randomize the WQI score assignment to wetland volume and see if this pattern is not merely created by chance.
+
+2) Use pre-built tests in packages such as lmPerm and coin. (Note: I did all the tests demonstrated in the notes to practice coding with my own data).
+
+Coding file: 'Assign5.R'
+
+
