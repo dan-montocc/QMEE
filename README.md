@@ -111,17 +111,17 @@ This is theorized to be due to the fact that as water-levels increase, so too do
 
 Therefore, with this data, since we were able to estimate wetland volume for a given site, we can test whether this dilution effect is occurring.
 
-Hypothesis #1: If the WQI is calculated using water quality parameters, such as TSS, that are measured using concentration-volume ratios, then as Georgian Bay coastal wetlands volumes increase with increasing water-levels, WQI scores should increase as well. This is because the lower the concentrations of these parameters, the higher the WQI score (considered to be better water quality).
+Hypothesis #1: That there is a significant effect of water levels on wetland volume and WQI score, that is as water levels increase, so too should wetland volume and WQI scores.
 
-Hypothesis #2: If the WQI is increasing due to decreasing concentrations of certain water quality parameters, then there should be a negative relationship between increasing wetland volumes and these parameters, such as turbidity and TSS (may also impact TP, TNN, TAN, TN, and/or SRP). I am focusing on the first two parameters for now, due to the past findings of Chow-Fraser (1999) looking specifically at turbidity and TSS.
+Hypothesis #2: If the WQI is calculated using water quality parameters, such as TSS, that are measured using concentration-volume ratios, then as Georgian Bay coastal wetlands volumes increase with increasing water-levels, WQI scores should increase as well. This is because the lower the concentrations of these parameters, the higher the WQI score (considered to be better water quality).
 
-"Traditional" statistical tests: Perform a linear regression of WQI scores against wetland volume
+"Traditional" statistical tests: Since the data are non-independent (that is matched essentially as a "before" (Period 1) or "after"(Period 2)) for a given wetland, I performed a paired t-test 
 
 Permutation tests: 
 
-1) Manually randomize the WQI score assignment to wetland volume and see if this pattern is not merely created by chance.
+1) Manually randomize the WQI score and volume assignment to period and see if this pattern is not merely created by chance.
 
-2) Use pre-built tests in packages such as lmPerm and coin. (Note: I did all the tests demonstrated in the notes to practice coding with my own data).
+2) Use pre-built tests in packages such as coin and exactRankTests.
 
 Coding file: 'Assign5.R'
 
