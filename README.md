@@ -126,3 +126,30 @@ Permutation tests:
 Coding file: 'Assign5.R'
 
 
+## Assignment 6
+
+__Author:__ Danielle Montocchio
+
+__Date:__ March 5, 2021
+
+__Purpose:__ Assignment 6 for QMEE (708) Course
+
+__Datasets:__ `WQI_Volume_Data_Grouped.csv` and `Nutrient_Data_Grouped.csv`
+
+__Hypothesis:__ If the WQI is calculated using water quality parameters, such as TSS and turbidity, that are measured using concentration-volume ratios, then as Georgian Bay coastal wetlands volumes increase with increasing water-levels, turbidity and TSS should decrease with increasing volumes, leading to an increase in WQI scores with increasing volumes. This is because the lower the concentrations of these parameters, the higher the WQI score (considered to be better water quality).
+
+_Turbidity regression analysis_
+
+According to the regression equation, the opposite relationship between volume and turbidity is occurring from what was predicted; i.e. as wetland log(volume) increases so too does turbidity. What does support our predictions however, is that Period 2 turbidity concentrations are lower than Period 1. However, there is a considerable overlap in confidence intervals, as is shown in the qplot by period, as well as a general overlap in data points between periods, indicating that this difference is not significant (cannot reject the null hypothesis).
+
+Also looking at the diagnostic plots in order of plotting by R (not order of importance), the residuals appear to follow a generally linear pattern, more so for the lower fitted values than the higher values. The normal q-q plot indicates that the data is generally normally-distributed, with the right-tail being fatter than a standard normal distribution (particularly observations 21, 23, and 45). Looking at the scale-location plot, I would say there is unequal variance due to the sharp angle in the line near the left of the plot. The variance appears to be more concentrated at the lower end of the fitted values. Finally, according to the leverage plot, there is no single observation that appears to be significantly influencing the regression.
+
+Using the emmeans package, performing a pairwise comparison of turbidity against log(volume) between Period 1 and 2, indicates that the mean estimate of turbidity in Period 1 is 0.745 NTU greater than in Period 2, which is illustrated in the pairwise comparison plot.
+
+_TSS regression analysis_
+
+According to the regression equation, the relationship between volume and TSS follows what was predicted; i.e. as wetland log(volume) increases, TSS decreases. In addition to this negative relationship for both periods,Period 2 on average has lower TSS concentrations than in Period 1. However, there is a considerable overlap in confidence intervals, as is shown in the qplot by period, as well as a general overlap in data points between periods, indicating that this difference is not significant (cannot reject the null hypothesis). This is also reflected in the coefficient p-values, and the considerably low R-squared value for the overall model. 
+
+Again looking at the diagnostic plots in order of plotting by R (not order of importance), the residuals appear to follow a generally linear pattern, more so for the lower fitted values than the higher values, as the line deeps quite a bit for the higher fitted values. The normal q-q plot indicates that the data is generally normally-distributed, until the first theoretical quantile, with the right-tail of this distribution being fatter than a standard normal distribution (although considering the robust nature of linear regressions to non-normality, this is likely acceptable). Looking at the scale-location plot, I would say there is highly unequal (non-random) variance due to the clustering of the standardized residuals at either end of the fitted values, reflected by the sharp angle in the line near the left and right of the plot (I would likely conclude a violation of the homoscedasticity assumption for this data). Finally, according to the leverage plot, there is no single observation that appears to be significantly influencing the regression.
+
+Using the emmeans package, performing a pairwise comparison of TSS against log(volume) between Period 1 and 2, indicates that the mean estimate of TSS in Period 1 is 1.48 mg/L greater than in Period 2, which is illustrated in the pairwise comparison plot. This difference is non-significant however (therefore we cannot reject the null hypothesis in this case if we use an alpha-level of 0.05).
