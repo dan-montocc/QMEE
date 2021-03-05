@@ -136,6 +136,8 @@ __Purpose:__ Assignment 6 for QMEE (708) Course
 
 __Datasets:__ `WQI_Volume_Data_Grouped.csv` and `Nutrient_Data_Grouped.csv`
 
+__R-coding File:__ `Assign6.R`
+
 __Hypothesis:__ If the WQI is calculated using water quality parameters, such as TSS and turbidity, that are measured using concentration-volume ratios, then as Georgian Bay coastal wetlands volumes increase with increasing water-levels, turbidity and TSS should decrease with increasing volumes, leading to an increase in WQI scores with increasing volumes. This is because the lower the concentrations of these parameters, the higher the WQI score (considered to be better water quality).
 
 _Turbidity regression analysis_
