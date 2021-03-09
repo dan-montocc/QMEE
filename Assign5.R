@@ -10,6 +10,16 @@ WQI_Vol <- read.csv(here("WQI_Volume_Data.csv"))
 summary(WQI_Vol)
 
 #evaluate distributions of WQI and volume
+## BMB: avoid repeating code: you could write a small wrapper function that would do all of this
+## Why do you care about the normality of any of these distributions?
+## I'm not sure that the dnorm() is doing what you think?
+
+dfun <- function(x) {
+    hist(x, freq=FALSE)
+    curve(dnorm(x, mean=mean(x), sd=sd(x)), col="blue",add=TRUE)
+}
+dfun(WQI_Vol$WQI_1)
+
 par(mfrow=c(2,2))
 hist(WQI_Vol$WQI_1)
 lines(density(WQI_Vol$WQI_1), col="red")
@@ -40,11 +50,16 @@ WQI_difference <- WQI_Vol$WQI_1 - WQI_Vol$WQI_2  #Use that order to keep most di
 nreps <- 10000
 set.seed(1086)
 resampMeanDiff <- numeric(nreps)
+## BMB: instead of sampling -1, 1 you could scramble whether
+## a sample from a pair is in group 1 or 2.
+## But this is good.
+table(sign(WQI_difference))
 for (i in 1:nreps) {
-  signs <- sample( c(1,-1),length(WQI_difference), replace = T)
+  signs <- sample( c(1,-1),length(WQI_difference), replace = TRUE)
   resamp <- WQI_difference * signs
   resampMeanDiff[i] <- mean(resamp)
 }
+
 WQI_diff_obs <- abs(WQI_diff_obs)
 highprob <- length(resampMeanDiff[resampMeanDiff >= WQI_diff_obs])/nreps
 lowprob <- length(WQI_Vol$resampMeanDiff[WQI_Vol$resampMeanDiff <= (-1)*WQI_Vol$WQI_diff_obs])/nreps
@@ -61,9 +76,10 @@ text(-0.4,2,"p-value")
 text(-0.4,1.8, prob2tailed)
 
 # Compare to Student's t
-tvalue <- t.test(WQI_Vol$WQI_1, WQI_Vol$WQI_2, paired = T)$statistic
-
+tvalue <- t.test(WQI_Vol$WQI_1, WQI_Vol$WQI_2, paired = TRUE)$statistic
 cat("The t value from a standard matched-pairs t test is= ",tvalue, '\n')
+## and what's the p-value?
+## (always use TRUE rather than T)
 
 #another way to do this online I found
 nreps <- 99999
@@ -84,8 +100,11 @@ sum( abs(rndmdist) >= abs(m0))/length(rndmdist)
 
 #error: issue with data structure perhaps?
 #Upload data with period grouping variable
-##WQI_Vol_Grouped <- read.csv(here("WQI_Volume_Data_Grouped.csv"))
-##oneway_test(WQI ~ Period | pairs, WQI_Vol_Grouped, distribution=approximate(nreps=9999))
+## BMB: make both Period and Site factors
+WQI_Vol_Grouped <- read.csv(here("WQI_Volume_Data_Grouped.csv"))
+WQI_Vol_Grouped$Site <-  factor(WQI_Vol_Grouped$Site)
+WQI_Vol_Grouped$Period <-  factor(WQI_Vol_Grouped$Period)
+oneway_test(WQI ~ Period | Site, WQI_Vol_Grouped, distribution=approximate())
 
 #not sure how to resolve issue
 #try a different function
@@ -93,7 +112,6 @@ library(exactRankTests)          # for perm.test()
 DV <- c(WQI_Vol$WQI_1,WQI_Vol$WQI_2)
 IV<- factor(rep(c("low","high"), c(length(WQI_Vol$WQI_1),length(WQI_Vol$WQI_2))))
 perm.test(DV ~ IV, paired=TRUE, alternative="two.sided", exact=TRUE)$p.value
-
 
 #repeat for volume
 #manual permutation
@@ -143,3 +161,10 @@ sum( abs(rndmdist) >= abs(m0))/length(rndmdist)
 DV2 <- c(WQI_Vol$Volume_1,WQI_Vol$Volume_2)
 IV2 <- factor(rep(c("low","high"), c(length(WQI_Vol$Volume_1),length(WQI_Vol$Volume_2))))
 perm.test(DV2 ~ IV2, paired=TRUE, alternative="two.sided", exact=TRUE)$p.value
+
+## BMB: this is good; doing the paired tests took a little extra work
+## (by the way, if you used any external resources you should provide
+## links/attribution)
+## You didn't need to do the t-test p-value; you could have just done
+## t.test(paired=TRUE) for comparison.
+## grade: 2.2
