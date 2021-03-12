@@ -166,6 +166,8 @@ __Purpose:__ Assignment 7 for QMEE (708) Course
 
 __Dataset:__ `SpeciesData_Proportions.csv`
 
+__R-script file:__ `Assign7.R`
+
 __Variables:__ TURB = mean turbidity for that site and period; S_Prop = proportion of submergent  species out of total no. of species found; Sub = count of submergent species found
 
 __Hypothesis:__ Since the growth of submergent aquatic vegetation is dependent on water clarity for photosynthesis, I predict that as turbidity increases, the number and/or proportion of submergent vegetation species should decrease.
