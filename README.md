@@ -155,3 +155,29 @@ According to the regression equation, the relationship between volume and TSS fo
 Again looking at the diagnostic plots in order of plotting by R (not order of importance), the residuals appear to follow a generally linear pattern, more so for the lower fitted values than the higher values, as the line deeps quite a bit for the higher fitted values. The normal q-q plot indicates that the data is generally normally-distributed, until the first theoretical quantile, with the right-tail of this distribution being fatter than a standard normal distribution (although considering the robust nature of linear regressions to non-normality, this is likely acceptable). Looking at the scale-location plot, I would say there is highly unequal (non-random) variance due to the clustering of the standardized residuals at either end of the fitted values, reflected by the sharp angle in the line near the left and right of the plot (I would likely conclude a violation of the homoscedasticity assumption for this data). Finally, according to the leverage plot, there is no single observation that appears to be significantly influencing the regression.
 
 Using the emmeans package, performing a pairwise comparison of TSS against log(volume) between Period 1 and 2, indicates that the mean estimate of TSS in Period 1 is 1.48 mg/L greater than in Period 2, which is illustrated in the pairwise comparison plot. This difference is non-significant however (therefore we cannot reject the null hypothesis in this case if we use an alpha-level of 0.05).
+
+## Assignment 7
+
+__Author:__ Danielle Montocchio
+
+__Date:__ March 12, 2021
+
+__Purpose:__ Assignment 7 for QMEE (708) Course
+
+__Dataset:__ `SpeciesData_Proportions.csv`
+
+__Variables:__ TURB = mean turbidity for that site and period; S_Prop = proportion of submergent  species out of total no. of species found; Sub = count of submergent species found
+
+__Hypothesis:__ Since the growth of submergent aquatic vegetation is dependent on water clarity for photosynthesis, I predict that as turbidity increases, the number and/or proportion of submergent vegetation species should decrease.
+
+__Testing:__ 
+
+_Poisson model_
+
+First, I built a GLM model with a poisson distribution for the total count data of submergent species against turbidity (NTU). After this model was built, I calculated the dispersion, and found the data to be highly overdispersed (~6), therefore I created a quasipoisson model to account for this overdispersion. Looking at the diagnostic plots of this model, the residuals do not appear to have a clear non-linear pattern (such as quadratic), but are heavily condensed to the left of the plot (at the low predicted values). The Q-Q plot shows that the data is reasonably normally-distributed, however there does appear to be inflation in both tails of the distribution. As for homoscedasticity, the variance appears to be more concentrated at the lower end of the predicted values, and not as random as one would like for this model. Finally, the leverage plot shows that there are certain points that appear to be leveraging the model, particularly observation 39, but perhaps not drastically (not outside of the 1 Cook's distance line). The DHARMa residual diagnostic is consistent with these observations as it found that all three test statistics of dispersion, outliers, and uniformity (KS test) are significant, indicating that this model is not suitable for this data's distribution and that the null hypothesis cannot be rejected in this case. The autocorrelation plot shows that as submergent plant species count increases, it tends to continue increasing, that is this variable is highly autocorrelated until lag 20+.
+
+_Binomial model_
+
+Second, I built a GLM model with a binomial distribution for the proportion of submergent species found in a given site against turbidity (NTU). Looking at the diagnostic plots of this model, the residuals do not appear to have a clear non-linear pattern (such as quadratic), but are heavily condensed to the left of the plot (at the low predicted values). The Q-Q plot shows that the data is reasonably normally-distributed, however there does appear to be very slight inflation in both tails of the distribution (likely this deviation is non-significant). As for homoscedasticity, the variance appears to be more concentrated at the lower end of the predicted values, and not as random as one would like for this model. Finally, the leverage plot shows that there are no certain points that appear to be leveraging the model. The DHARMa residual diagnostics shows that all three test statistics of dispersion, outliers, and uniformity (KS test) are significant, indicating that is model is not suitable for this data's distribution and that the null hypothesis cannot be rejected in this case. The autocorrelation plot shows that as submergent plant proportion is not significantly autocorrelated for most lags, and therefore likely not highly autocorrelated.
+
+__Overall:__ If I were to make a judgement call, I think neither of these models are a suitable fit for this specific dataset.
