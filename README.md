@@ -140,9 +140,13 @@ __R-coding File:__ `Assign6.R`
 
 __Hypothesis:__ If the WQI is calculated using water quality parameters, such as TSS and turbidity, that are measured using concentration-volume ratios, then as Georgian Bay coastal wetlands volumes increase with increasing water-levels, turbidity and TSS should decrease with increasing volumes, leading to an increase in WQI scores with increasing volumes. This is because the lower the concentrations of these parameters, the higher the WQI score (considered to be better water quality).
 
+JD: NIce and clear
+
 _Turbidity regression analysis_
 
 According to the regression equation, the opposite relationship between volume and turbidity is occurring from what was predicted; i.e. as wetland log(volume) increases so too does turbidity. What does support our predictions however, is that Period 2 turbidity concentrations are lower than Period 1. However, there is a considerable overlap in confidence intervals, as is shown in the qplot by period, as well as a general overlap in data points between periods, indicating that this difference is not significant (cannot reject the null hypothesis).
+
+JD: I can't really agree that the Period 2 vs. Period 1 single data point supports any conclusions about turbidity
 
 Also looking at the diagnostic plots in order of plotting by R (not order of importance), the residuals appear to follow a generally linear pattern, more so for the lower fitted values than the higher values. The normal q-q plot indicates that the data is generally normally-distributed, with the right-tail being fatter than a standard normal distribution (particularly observations 21, 23, and 45). Looking at the scale-location plot, I would say there is unequal variance due to the sharp angle in the line near the left of the plot. The variance appears to be more concentrated at the lower end of the fitted values. Finally, according to the leverage plot, there is no single observation that appears to be significantly influencing the regression.
 
@@ -154,7 +158,13 @@ According to the regression equation, the relationship between volume and TSS fo
 
 Again looking at the diagnostic plots in order of plotting by R (not order of importance), the residuals appear to follow a generally linear pattern, more so for the lower fitted values than the higher values, as the line deeps quite a bit for the higher fitted values. The normal q-q plot indicates that the data is generally normally-distributed, until the first theoretical quantile, with the right-tail of this distribution being fatter than a standard normal distribution (although considering the robust nature of linear regressions to non-normality, this is likely acceptable). Looking at the scale-location plot, I would say there is highly unequal (non-random) variance due to the clustering of the standardized residuals at either end of the fitted values, reflected by the sharp angle in the line near the left and right of the plot (I would likely conclude a violation of the homoscedasticity assumption for this data). Finally, according to the leverage plot, there is no single observation that appears to be significantly influencing the regression.
 
+JD: I don't think people say "first theoretical quantile"
+
 Using the emmeans package, performing a pairwise comparison of TSS against log(volume) between Period 1 and 2, indicates that the mean estimate of TSS in Period 1 is 1.48 mg/L greater than in Period 2, which is illustrated in the pairwise comparison plot. This difference is non-significant however (therefore we cannot reject the null hypothesis in this case if we use an alpha-level of 0.05).
+
+JD: This is technically correct, but we don't use effects plots directly for this purpose. In particular, it is possible for bars to overlap when differences are significant.
+
+Grade: 2.2/3
 
 ## Assignment 7
 
