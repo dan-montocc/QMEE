@@ -193,3 +193,15 @@ _Binomial model_
 Second, I built a GLM model with a binomial distribution for the proportion of submergent species found in a given site against turbidity (NTU). Looking at the diagnostic plots of this model, the residuals do not appear to have a clear non-linear pattern (such as quadratic), but are heavily condensed to the left of the plot (at the low predicted values). The Q-Q plot shows that the data is reasonably normally-distributed, however there does appear to be very slight inflation in both tails of the distribution (likely this deviation is non-significant). As for homoscedasticity, the variance appears to be more concentrated at the lower end of the predicted values, and not as random as one would like for this model. Finally, the leverage plot shows that there are no certain points that appear to be leveraging the model. The DHARMa residual diagnostics shows that all three test statistics of dispersion, outliers, and uniformity (KS test) are significant, indicating that is model is not suitable for this data's distribution and that the null hypothesis cannot be rejected in this case. The autocorrelation plot shows that as submergent plant proportion is not significantly autocorrelated for most lags, and therefore likely not highly autocorrelated.
 
 __Overall:__ If I were to make a judgement call, I think neither of these models are a suitable fit for this specific dataset.
+
+## Assignment 8
+
+Author: Danielle Montocchio
+
+Date: March 26, 2021
+
+Purpose: Assignment 8 for QMEE (708) Course
+
+Dataset: `NutrientVolume_DataJoin.Rda`
+
+Description: Continuation of assignment 5 and GLM, now using Bayesian statistics.

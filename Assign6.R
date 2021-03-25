@@ -58,3 +58,7 @@ plot(TSSVolMod)
 TSSPerContrast <- emmeans(TSSVolMod, "Period")
 pairs(TSSPerContrast)
 plot(TSSPerContrast, xlab="TSS Mean")
+
+
+#save joined dataset for future use
+saveRDS(Nutr_Vol_Per, file="NutrientVolume_DataJoin.Rda")
