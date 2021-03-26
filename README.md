@@ -204,4 +204,4 @@ Purpose: Assignment 8 for QMEE (708) Course
 
 Dataset: `NutrientVolume_DataJoin.Rda`
 
-Description: Continuation of assignment 6 and GLM, now using Bayesian model statistics.
+Description: Continuation of assignment 6 and linear regressions, now using Bayesian model statistics.
