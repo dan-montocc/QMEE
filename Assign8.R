@@ -40,7 +40,7 @@ TURBmodel <- function() {
     prec[i] <- tau
   }
   b_LogVol ~ dnorm(0, 0.0001)
-  intercept ~ dnorm(0,0.0001)
+  intercept ~ dbinom()##unsure of what parameters to put in here
   tau ~ dgamma(.001, .001)
 }
 
