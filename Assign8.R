@@ -40,7 +40,7 @@ TURBmodel <- function() {
     prec[i] <- tau
   }
   b_LogVol ~ dnorm(0, 0.0001)
-  intercept ~ dbinom()##unsure of what parameters to put in here
+  intercept ~ dnorm(0,0.0001)
   tau ~ dgamma(.001, .001)
 }
 
@@ -49,7 +49,7 @@ TURBmodel <- function() {
 TURBbayesmod <- jags(model.file= TURBmodel
                           , parameters=c("b_LogVol", "tau", "intercept")
                           , data = TURBdat
-                          #, nchains=4
+                          , n.chains=1
                           , inits=NULL
 )
 tidy(TURBbayesmod, conf.int=TRUE, conf.method="quantile")
